@@ -621,6 +621,33 @@ const raycaster = new THREE.Raycaster();
 
 const mouse = new THREE.Vector2();
 
+const defaultInfoPanel = `
+    <h2>🪐 Informasi Planet</h2>
+    <p>
+        Selamat datang di Pembelajaran Tata Surya Interaktif.
+
+        <br><br>
+
+        Klik salah satu planet untuk melihat informasi lengkap mengenai:
+        <br>
+        • Diameter
+        <br>
+        • Jarak dari Matahari
+        <br>
+        • Rotasi
+        <br>
+        • Revolusi
+        <br>
+        • Fakta Menarik
+
+        <br><br>
+
+        🚀 Jelajahi tata surya dan pelajari setiap planet!
+    </p>
+`;
+
+document.getElementById("infoPanel").innerHTML = defaultInfoPanel;
+
 function selectPlanet(event) {
   let clientX;
   let clientY;
@@ -649,8 +676,23 @@ function selectPlanet(event) {
 
     document.getElementById("infoPanel").innerHTML = `
       <h2>${planetInfo[selected].nama}</h2>
+
       ${planetInfo[selected].deskripsi}
+
+      <div class="info-actions mt-2">
+          <button id="resetInfoBtn">
+              ⬅ KEMBALI
+          </button>
+      </div>
     `;
+  }
+
+  const resetBtn = document.getElementById("resetInfoBtn");
+
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      document.getElementById("infoPanel").innerHTML = defaultInfoPanel;
+    });
   }
 }
 
