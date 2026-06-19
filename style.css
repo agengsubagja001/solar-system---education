@@ -11,7 +11,7 @@ body {
   /* cursor: none; */
 }
 
-#rocketCursor {
+/* #rocketCursor {
   position: fixed;
   left: 0;
   top: 0;
@@ -19,7 +19,7 @@ body {
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%) rotate(45deg);
-}
+} */
 
 canvas {
   display: block;

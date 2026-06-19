@@ -888,24 +888,24 @@ window.addEventListener("resize", () => {
 });
 
 // code baru
-const rocketCursor = document.getElementById("rocketCursor");
+// const rocketCursor = document.getElementById("rocketCursor");
 
-if (rocketCursor) {
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
+// if (rocketCursor) {
+//   document.addEventListener("mousemove", (e) => {
+//     mouseX = e.clientX;
+//     mouseY = e.clientY;
+//   });
 
-  animateRocket();
-}
+//   animateRocket();
+// }
 
-function animateRocket() {
-  rocketX += (mouseX - rocketX) * 0.15;
-  rocketY += (mouseY - rocketY) * 0.15;
+// function animateRocket() {
+//   rocketX += (mouseX - rocketX) * 0.15;
+//   rocketY += (mouseY - rocketY) * 0.15;
 
-  rocketCursor.style.left = rocketX + "px";
+//   rocketCursor.style.left = rocketX + "px";
 
-  rocketCursor.style.top = rocketY + "px";
+//   rocketCursor.style.top = rocketY + "px";
 
-  requestAnimationFrame(animateRocket);
-}
+//   requestAnimationFrame(animateRocket);
+// }
