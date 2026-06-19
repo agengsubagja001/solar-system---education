@@ -31,8 +31,16 @@ labelRenderer.domElement.style.pointerEvents = "none";
 document.body.appendChild(labelRenderer.domElement);
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enablePan = false;
 
 controls.enableDamping = true;
+
+controls.touches = {
+  ONE: THREE.TOUCH.ROTATE,
+  TWO: THREE.TOUCH.DOLLY_PAN,
+};
+
+// controls.enableDamping = true;
 
 const ambient = new THREE.AmbientLight(0xffffff, 0.6);
 
@@ -613,29 +621,46 @@ const raycaster = new THREE.Raycaster();
 
 const mouse = new THREE.Vector2();
 
-window.addEventListener("click", (event) => {
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+function selectPlanet(event) {
+  let clientX;
+  let clientY;
 
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  if (event.touches && event.touches.length > 0) {
+    clientX = event.touches[0].clientX;
+    clientY = event.touches[0].clientY;
+  } else {
+    clientX = event.clientX;
+    clientY = event.clientY;
+  }
+
+  mouse.x = (clientX / window.innerWidth) * 2 - 1;
+
+  mouse.y = -(clientY / window.innerHeight) * 2 + 1;
 
   raycaster.setFromCamera(mouse, camera);
 
-  const intersects = raycaster.intersectObjects(planets);
+  raycaster.far = 200;
+  raycaster.params.Points.threshold = 5;
+
+  const intersects = raycaster.intersectObjects(planets, true);
 
   if (intersects.length > 0) {
     const selected = intersects[0].object.name;
 
-    //     document.getElementById("infoPanel").innerHTML = `
-    // <h2>${planetInfo[selected].nama}</h2>
-    // <p>${planetInfo[selected].deskripsi}</p>
-    // `;
-
     document.getElementById("infoPanel").innerHTML = `
-        <h2>${planetInfo[selected].nama}</h2>
-        ${planetInfo[selected].deskripsi}
+      <h2>${planetInfo[selected].nama}</h2>
+      ${planetInfo[selected].deskripsi}
     `;
   }
+}
+
+renderer.domElement.addEventListener("pointerdown", selectPlanet);
+
+renderer.domElement.addEventListener("touchstart", selectPlanet, {
+  passive: true,
 });
+
+renderer.domElement.addEventListener("click", selectPlanet);
 
 let isPlaying = true;
 
@@ -688,18 +713,17 @@ window.addEventListener("resize", () => {
   labelRenderer.setSize(window.innerWidth, window.innerHeight);
 });
 
+// code baru
 const rocketCursor = document.getElementById("rocketCursor");
 
-let mouseX = 0;
-let mouseY = 0;
+if (rocketCursor) {
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
 
-let rocketX = 0;
-let rocketY = 0;
-
-document.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
+  animateRocket();
+}
 
 function animateRocket() {
   rocketX += (mouseX - rocketX) * 0.15;
@@ -711,8 +735,6 @@ function animateRocket() {
 
   requestAnimationFrame(animateRocket);
 }
-
-animateRocket();
 
 const saturnRingGeometry = new THREE.RingGeometry(6, 10, 128);
 
