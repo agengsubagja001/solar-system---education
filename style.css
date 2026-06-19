@@ -363,52 +363,118 @@ button:hover::before {
   display: flex;
 }
 
-.planet-modal-content {
-  width: 100%;
+@media (max-width: 768px) {
+  #modalContent {
+    color: #ffffff;
 
-  max-width: 500px;
+    font-size: 15px;
 
-  max-height: 85vh;
+    line-height: 1.8;
+  }
 
-  overflow-y: auto;
+  #modalContent b {
+    color: #00e5ff;
+  }
 
-  background: rgba(0, 10, 20, 0.95);
+  #modalContent p {
+    color: #d8f8ff;
 
-  border: 2px solid #00e5ff;
-
-  border-radius: 15px;
-
-  padding: 20px;
-
-  position: relative;
-
-  box-shadow:
-    0 0 10px #00e5ff,
-    0 0 25px rgba(0, 229, 255, 0.5);
+    text-align: justify;
+  }
 }
 
-#closeModalBtn {
-  position: absolute;
+@media (max-width: 768px) {
+  .planet-modal-content::-webkit-scrollbar {
+    width: 6px;
+  }
 
-  right: 10px;
+  .planet-modal-content::-webkit-scrollbar-thumb {
+    background: #00e5ff;
 
-  top: 10px;
+    border-radius: 10px;
+  }
+}
 
-  width: 40px;
+@media (max-width: 768px) {
+  .planet-modal-content {
+    width: 92%;
 
-  height: 40px;
+    max-width: 420px;
 
-  border-radius: 50%;
+    max-height: 80vh;
 
-  border: none;
+    overflow-y: auto;
 
-  font-size: 20px;
+    background: rgba(0, 8, 20, 0.97);
 
-  cursor: pointer;
+    border: 2px solid #00e5ff;
 
-  color: white;
+    border-radius: 20px;
 
-  background: #ff4444;
+    padding: 20px;
+
+    position: relative;
+
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
+
+    color: white;
+  }
+}
+
+@media (max-width: 768px) {
+  #closeModalBtn {
+    position: absolute;
+
+    top: 15px;
+
+    right: 15px;
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #ff4d4d;
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+  }
+}
+
+@media (max-width: 768px) {
+  #modalContent h2 {
+    color: #00e5ff;
+
+    text-align: center;
+
+    font-size: 26px;
+
+    margin-bottom: 20px;
+
+    padding-right: 50px;
+
+    text-shadow: 0 0 5px #00e5ff;
+
+    border-bottom: 1px solid rgba(0, 229, 255, 0.4);
+
+    padding-bottom: 10px;
+  }
 }
 
 @media (max-width: 768px) {

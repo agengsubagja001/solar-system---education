@@ -704,7 +704,7 @@ function selectPlanet(event) {
 
     if (isMobile) {
       document.getElementById("modalContent").innerHTML = `
-        <h2>${planetInfo[selected].nama}</h2>
+         <h2>🪐 ${planetInfo[selected].nama}</h2>
         ${planetInfo[selected].deskripsi}
       `;
 
