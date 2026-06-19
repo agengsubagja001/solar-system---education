@@ -1,0 +1,293 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Orbitron", sans-serif;
+
+  background: radial-gradient(circle at center, #001a33, #000000);
+
+  color: white;
+
+  min-height: 100vh;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container {
+  max-width: 900px;
+
+  margin: auto;
+
+  padding: 20px;
+
+  text-align: center;
+  min-height: 100vh;
+}
+
+h1 {
+  color: #00e5ff;
+
+  margin-bottom: 20px;
+
+  text-shadow:
+    0 0 10px #00e5ff,
+    0 0 20px #00e5ff;
+}
+
+.status-bar {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+  font-size: 22px;
+}
+
+.progress-container {
+  width: 100%;
+
+  height: 18px;
+
+  border: 1px solid #00e5ff;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  margin-bottom: 30px;
+}
+
+#progressBar {
+  width: 0%;
+
+  height: 100%;
+
+  background: #00e5ff;
+
+  transition: 0.5s;
+}
+
+.rocket-area {
+  height: 120px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+#rocket {
+  font-size: 80px;
+
+  transition: 0.6s;
+}
+
+.question-box {
+  margin-bottom: 20px;
+}
+
+#question {
+  color: white;
+
+  min-height: 80px;
+}
+
+#answers {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  max-width: 700px;
+
+  margin: auto;
+}
+
+.answer-btn {
+  width: 100%;
+
+  padding: 18px;
+
+  text-align: left;
+
+  border: none;
+
+  border-radius: 15px;
+
+  background: #051b30;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  border: 1px solid #00e5ff;
+
+  transition: 0.3s;
+}
+
+.answer-btn:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 0 15px #00e5ff;
+}
+
+.correct {
+  background: #00aa55 !important;
+}
+
+.wrong {
+  background: #cc2222 !important;
+}
+
+.shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+#result {
+  margin-top: 30px;
+
+  font-size: 24px;
+}
+
+#result button {
+  margin-top: 20px;
+
+  padding: 18px 40px;
+
+  font-size: 24px;
+
+  font-family: "Orbitron", sans-serif;
+
+  font-weight: bold;
+
+  color: white;
+
+  background: linear-gradient(45deg, #00e5ff, #0088ff);
+
+  border: none;
+
+  border-radius: 15px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 15px #00e5ff,
+    0 0 30px rgba(0, 229, 255, 0.5);
+
+  transition: 0.3s;
+}
+
+#result button:hover {
+  transform: scale(1.08);
+
+  box-shadow:
+    0 0 20px #00e5ff,
+    0 0 40px #00e5ff;
+}
+
+@media (max-width: 768px) {
+  #rocket {
+    font-size: 60px;
+  }
+}
+
+#feedback {
+  margin-top: 20px;
+
+  padding: 20px;
+
+  border-radius: 15px;
+
+  background: rgba(0, 229, 255, 0.1);
+
+  border: 1px solid #00e5ff;
+
+  color: white;
+
+  display: none;
+
+  max-width: 700px;
+
+  margin-left: auto;
+
+  margin-right: auto;
+
+  z-index: 999;
+
+  position: relative;
+}
+
+.feedback-correct {
+  border-color: #00ff88;
+}
+
+.feedback-wrong {
+  border-color: #ff4444;
+}
+
+.play-again-btn {
+  width: 300px;
+
+  height: 70px;
+
+  font-size: 28px;
+
+  font-weight: bold;
+
+  letter-spacing: 2px;
+
+  color: white;
+
+  background: linear-gradient(45deg, #00e5ff, #00a2ff);
+
+  border: 2px solid #00e5ff;
+
+  border-radius: 20px;
+
+  cursor: pointer;
+
+  text-shadow: 0 0 10px white;
+
+  box-shadow:
+    0 0 20px #00e5ff,
+    0 0 40px rgba(0, 229, 255, 0.5);
+
+  transition: 0.3s;
+}
+
+.play-again-btn:hover {
+  transform: scale(1.08);
+
+  box-shadow:
+    0 0 30px #00e5ff,
+    0 0 60px #00e5ff;
+}

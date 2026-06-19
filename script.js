@@ -806,6 +806,12 @@ document.getElementById("playBtn").addEventListener("click", () => {
 // CODE BARU
 const soundBtn = document.getElementById("soundBtn");
 
+const quizBtn = document.getElementById("quizBtn");
+
+quizBtn.addEventListener("click", () => {
+  window.location.href = "quiz.html";
+});
+
 const narasi = new Audio("audio/narasi.mp3");
 
 let isNarasiPlaying = false;
@@ -859,6 +865,24 @@ function animate() {
 }
 
 animate();
+
+// =====================
+// SPLASH SCREEN
+// =====================
+
+const splashScreen = document.getElementById("splashScreen");
+
+const startBtn = document.getElementById("startBtn");
+
+if (startBtn) {
+  startBtn.addEventListener("click", () => {
+    splashScreen.classList.add("hide");
+  });
+}
+
+setTimeout(() => {
+  splashScreen.classList.add("hide");
+}, 8000);
 
 const closeModalBtn = document.getElementById("closeModalBtn");
 

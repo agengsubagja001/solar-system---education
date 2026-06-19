@@ -496,3 +496,141 @@ button:hover::before {
     display: none;
   }
 }
+
+/* =====================
+   SPLASH SCREEN
+===================== */
+
+#splashScreen {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 99999;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: radial-gradient(circle, #001122, #000000);
+
+  transition: 1s;
+}
+
+#splashScreen.hide {
+  opacity: 0;
+
+  visibility: hidden;
+}
+
+.splash-content {
+  text-align: center;
+
+  padding: 20px;
+}
+
+.planet-logo {
+  font-size: 80px;
+
+  animation: floatPlanet 3s ease-in-out infinite;
+}
+
+@keyframes floatPlanet {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.splash-content h1 {
+  font-family: "Orbitron", sans-serif;
+
+  color: #00e5ff;
+
+  font-size: 48px;
+
+  margin: 10px 0;
+
+  text-shadow:
+    0 0 10px #00e5ff,
+    0 0 20px #00e5ff,
+    0 0 40px #00e5ff;
+}
+
+.splash-content p {
+  color: white;
+
+  margin-bottom: 30px;
+}
+
+#startBtn {
+  padding: 15px 35px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #00e5ff;
+
+  color: black;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+#startBtn:hover {
+  transform: scale(1.05);
+}
+
+.loading-text {
+  margin-top: 20px;
+
+  color: #00e5ff;
+
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+#quizBtn {
+  background: linear-gradient(45deg, #ff9800, #ff5722);
+
+  color: white;
+
+  border: none;
+
+  padding: 12px 18px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+
+  box-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
+}
+
+#quizBtn:hover {
+  transform: scale(1.05);
+}
