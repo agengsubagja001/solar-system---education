@@ -587,6 +587,32 @@ const jupiter = createPlanet("Jupiter", 5, 50, "textures/jupiter.jpg");
 
 const saturn = createPlanet("Saturn", 4.5, 65, "textures/saturn.jpg");
 
+// ======================
+// CINCIN SATURNUS
+// ======================
+
+const saturnRingGeometry = new THREE.RingGeometry(5.5, 9, 128);
+
+const saturnRingMaterial = new THREE.MeshBasicMaterial({
+  color: 0xd8c29d,
+
+  side: THREE.DoubleSide,
+
+  transparent: true,
+
+  opacity: 0.9,
+});
+
+const saturnRing = new THREE.Mesh(saturnRingGeometry, saturnRingMaterial);
+
+// posisi cincin mendatar mengelilingi planet
+saturnRing.rotation.x = Math.PI / 2;
+
+// sedikit naik supaya tidak bertabrakan dengan permukaan planet
+saturnRing.position.y = 0.1;
+
+saturn.planet.add(saturnRing);
+
 const uranus = createPlanet("Uranus", 3.5, 80, "textures/uranus.jpg");
 
 const neptune = createPlanet("Neptune", 3.5, 95, "textures/neptune.jpg");
@@ -674,17 +700,27 @@ function selectPlanet(event) {
   if (intersects.length > 0) {
     const selected = intersects[0].object.name;
 
-    document.getElementById("infoPanel").innerHTML = `
-      <h2>${planetInfo[selected].nama}</h2>
+    const isMobile = window.innerWidth <= 768;
 
-      ${planetInfo[selected].deskripsi}
+    if (isMobile) {
+      document.getElementById("modalContent").innerHTML = `
+        <h2>${planetInfo[selected].nama}</h2>
+        ${planetInfo[selected].deskripsi}
+      `;
 
-      <div class="info-actions mt-2">
-          <button id="resetInfoBtn">
-              ⬅ KEMBALI
-          </button>
-      </div>
+      document.getElementById("planetModal").classList.add("show");
+    } else {
+      document.getElementById("infoPanel").innerHTML = `
+        <h2>${planetInfo[selected].nama}</h2>
+        ${planetInfo[selected].deskripsi}
+
+        <div class="info-actions">
+            <button id="resetInfoBtn">
+                ⬅ KEMBALI
+            </button>
+        </div>
     `;
+    }
   }
 
   const resetBtn = document.getElementById("resetInfoBtn");
@@ -769,6 +805,23 @@ function animate() {
 
 animate();
 
+const closeModalBtn = document.getElementById("closeModalBtn");
+
+if (closeModalBtn) {
+  closeModalBtn.addEventListener("click", () => {
+    document.getElementById("planetModal").classList.remove("show");
+  });
+}
+
+// Klik area gelap untuk menutup modal
+const planetModal = document.getElementById("planetModal");
+
+planetModal.addEventListener("click", (e) => {
+  if (e.target === planetModal) {
+    planetModal.classList.remove("show");
+  }
+});
+
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
 
@@ -801,41 +854,3 @@ function animateRocket() {
 
   requestAnimationFrame(animateRocket);
 }
-
-const saturnRingGeometry = new THREE.RingGeometry(6, 10, 128);
-
-const ringPos = saturnRingGeometry.attributes.position;
-
-const v3 = new THREE.Vector3();
-
-for (let i = 0; i < ringPos.count; i++) {
-  v3.fromBufferAttribute(ringPos, i);
-
-  saturnRingGeometry.attributes.uv.setXY(i, v3.length() < 8 ? 0 : 1, 1);
-}
-
-const saturnRingMaterial = new THREE.MeshStandardMaterial({
-  color: 0xe8d7a9,
-
-  side: THREE.DoubleSide,
-
-  transparent: true,
-
-  opacity: 0.8,
-
-  roughness: 1,
-
-  metalness: 0,
-});
-
-const saturnRing = new THREE.Mesh(saturnRingGeometry, saturnRingMaterial);
-
-saturnRing.rotation.x = Math.PI * 0.45;
-
-saturnRing.rotation.z = 0.2;
-
-saturn.planet.add(saturnRing);
-
-const saturnGlow = new THREE.PointLight(0xffe7a0, 0.5, 20);
-
-saturn.planet.add(saturnGlow);
