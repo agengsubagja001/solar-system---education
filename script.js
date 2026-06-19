@@ -170,6 +170,45 @@ const planets = [];
 
 // code baru
 const planetInfo = {
+  Sun: {
+    nama: "Matahari",
+    deskripsi: `
+  <p>
+  Matahari adalah bintang pusat tata surya yang menjadi sumber cahaya dan energi bagi seluruh planet.
+  </p>
+
+  <hr>
+
+  <b>☀️ Jenis</b><br>
+  Bintang Deret Utama (G-Type)
+
+  <br><br>
+
+  <b>📏 Diameter</b><br>
+  1.392.700 km
+
+  <br><br>
+
+  <b>🌡️ Suhu Permukaan</b><br>
+  ± 5.500°C
+
+  <br><br>
+
+  <b>🔥 Suhu Inti</b><br>
+  ± 15 juta°C
+
+  <br><br>
+
+  <b>⚖️ Massa</b><br>
+  1,989 × 10³⁰ kg
+
+  <br><br>
+
+  <b>💡 Fakta Menarik</b><br>
+  Matahari mengandung sekitar 99,86% dari seluruh massa tata surya dan menjadi sumber energi utama bagi kehidupan di Bumi.
+  `,
+  },
+
   Mercury: {
     nama: "Merkurius",
     deskripsi: `
@@ -572,8 +611,16 @@ const sun = new THREE.Mesh(
     map: sunTexture,
   }),
 );
+sun.name = "Sun";
 
 scene.add(sun);
+
+planets.push(sun);
+
+// Label Matahari
+// const sunLabel = createLabel("Matahari");
+// sunLabel.position.set(0, 11, 0);
+// sun.add(sunLabel);
 
 const mercury = createPlanet("Mercury", 1.5, 15, "textures/mercury.jpg");
 
@@ -698,13 +745,21 @@ function selectPlanet(event) {
   const intersects = raycaster.intersectObjects(planets, true);
 
   if (intersects.length > 0) {
-    const selected = intersects[0].object.name;
+    let selected = intersects[0].object.name;
+
+    // Jika yang diklik adalah cincin Saturnus,
+    // gunakan parent planet Saturnus
+    if (!planetInfo[selected] && intersects[0].object.parent) {
+      selected = intersects[0].object.parent.name;
+    }
+
+    if (!planetInfo[selected]) return;
 
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
       document.getElementById("modalContent").innerHTML = `
-         <h2>🪐 ${planetInfo[selected].nama}</h2>
+         <h2>${planetInfo[selected].nama}</h2>
         ${planetInfo[selected].deskripsi}
       `;
 
