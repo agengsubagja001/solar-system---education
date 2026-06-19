@@ -670,10 +670,34 @@ document.getElementById("playBtn").addEventListener("click", () => {
   document.getElementById("playBtn").innerText = isPlaying ? "Pause" : "Play";
 });
 
+// CODE BARU
+const soundBtn = document.getElementById("soundBtn");
+
 const narasi = new Audio("audio/narasi.mp3");
 
-document.getElementById("soundBtn").addEventListener("click", () => {
-  narasi.play();
+let isNarasiPlaying = false;
+
+soundBtn.addEventListener("click", () => {
+  if (isNarasiPlaying) {
+    narasi.pause();
+    narasi.currentTime = 0;
+
+    soundBtn.innerHTML = "🔊 PLAY SOUND";
+
+    isNarasiPlaying = false;
+  } else {
+    narasi.play();
+
+    soundBtn.innerHTML = "🔇 STOP SOUND";
+
+    isNarasiPlaying = true;
+  }
+});
+
+narasi.addEventListener("ended", () => {
+  soundBtn.innerHTML = "🔊 PLAY SOUND";
+
+  isNarasiPlaying = false;
 });
 
 function animate() {
