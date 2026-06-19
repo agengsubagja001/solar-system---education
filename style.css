@@ -151,16 +151,103 @@ canvas {
 }
 
 button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
+  padding: 12px 24px;
+
+  margin-right: 12px;
+
+  background: rgba(0, 10, 20, 0.85);
+
+  color: #00e5ff;
+
+  border: 2px solid #00e5ff;
+
+  border-radius: 12px;
+
+  font-family: "Orbitron", sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  letter-spacing: 1px;
+
   cursor: pointer;
-  margin-right: 10px;
-  font-size: 15px;
+
+  backdrop-filter: blur(8px);
+  position: relative; /* tambahkan ini */
+  overflow: hidden; /* tambahkan ini */
+
+  box-shadow:
+    0 0 5px #00e5ff,
+    0 0 10px rgba(0, 229, 255, 0.5),
+    inset 0 0 10px rgba(0, 229, 255, 0.2);
+
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  opacity: 0.8;
+  color: white;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 10px #00e5ff,
+    0 0 20px #00e5ff,
+    0 0 30px rgba(0, 229, 255, 0.8);
+}
+
+button:active {
+  transform: scale(0.95);
+
+  box-shadow:
+    0 0 5px #00e5ff,
+    inset 0 0 15px #00e5ff;
+}
+
+button::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 12px;
+
+  opacity: 0;
+
+  transition: 0.3s;
+
+  box-shadow:
+    0 0 20px #00e5ff,
+    0 0 40px #00e5ff;
+}
+
+button:hover::before {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  #controls {
+    width: 100%;
+
+    left: 0;
+
+    bottom: 15px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+  }
+
+  button {
+    min-width: 140px;
+
+    font-size: 12px;
+
+    padding: 10px 16px;
+  }
 }
 
 @media (max-width: 768px) {
